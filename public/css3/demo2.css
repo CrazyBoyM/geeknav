@@ -1,0 +1,409 @@
+/* General Blueprint Style */
+
+canvas {
+	position:absolute;z-index:-2
+}
+
+@font-face {
+	font-family: 'bpicons';
+	font-weight: normal;
+	font-style: normal;
+	src: url('../fonts/bpicons/bpicons.eot');
+	src: url('../fonts/bpicons/bpicons.eot?#iefix') format('embedded-opentype'), url('../fonts/bpicons/bpicons.woff') format('woff'), url('../fonts/bpicons/bpicons.ttf') format('truetype'), url('../fonts/bpicons/bpicons.svg#bpicons') format('svg');
+}/* Made with http://icomoon.io/ */
+
+
+/* Resets */
+
+*,
+*:after,
+*:before {
+	box-sizing: border-box;
+}
+
+
+/* Helper classes */
+
+.cf:before,
+.cf:after {
+	content: ' ';
+	display: table;
+}
+
+.cf:after {
+	clear: both;
+}
+
+
+/* Main styles */
+
+body {
+	font-family: 'Avenir Next', Avenir, 'Helvetica Neue', 'Lato', 'Segoe UI', Helvetica, Arial, sans-serif;
+	overflow: hidden;
+	margin: 0;
+	color: #fff;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-weight: 356;
+}
+
+a {
+	text-decoration: none;
+	color: #fff;
+	outline: none;
+}
+
+a:hover {
+	color: #ddd;
+}
+
+.container {
+	overflow-y: auto;
+	height: 100vh;
+}
+
+
+/* Blueprint header */
+
+.bp-header {
+	display: -webkit-flex;
+	display: flex;
+}
+
+.bp-header__main {
+	margin: 0 0 0 auto;
+	padding: 2em 3em 0;
+	text-align: right;
+}
+
+.bp-header__title {
+	font-size: 1.3em;
+	font-weight: 400;
+	line-height: 1.3;
+	margin: 0.25em 0 0;
+	/* text-shadow: 18px -17px 18px #000; */
+}
+
+.bp-header__present {
+	font-size: 0.8em;
+	font-weight: 700;
+	position: relative;
+	z-index: 100;
+	display: block;
+	margin: 0 -8px 0 0;
+	padding: 0 0 0.6em 0;
+	text-indent: 3px;
+	letter-spacing: 3px;
+	text-transform: uppercase;
+	color: #d0d4d8;
+	/* text-shadow: 17px -1px 17px black; */
+}
+
+.bp-tooltip:after {
+	position: relative;
+	top: -8px;
+	left: -8px;
+	display: inline-block;
+	width: 0;
+	height: 0;
+}
+
+.bp-tooltip:hover:before {
+	content: attr(data-content);
+	font-size: 110%;
+	font-weight: 700;
+	line-height: 1.2;
+	position: absolute;
+	top: 1.5em;
+	right: 0;
+	width: 50vw;
+	padding: 0.8em 1em;
+	text-align: right;
+	text-indent: 0;
+	letter-spacing: 0;
+	text-transform: none;
+	color: #fff;
+	background: #5c5edc;
+}
+
+.bp-nav {
+	margin: 0.5em 0 0 auto;
+	text-align: right;
+	/* box-shadow: 11px -13px 17px 20px black; */
+}
+
+.bp-nav__item {
+	position: relative;
+	display: inline-block;
+	width: 2.5em;
+	height: 2.5em;
+	margin: 0 0.1em;
+	text-align: left;
+	border-radius: 50%;
+}
+
+.bp-nav__item > span {
+	display: none;
+}
+
+.bp-nav__item:hover:before {
+	content: attr(data-info);
+	font-size: 0.85em;
+	font-weight: bold;
+	position: absolute;
+	top: 120%;
+	right: 0;
+	width: 600%;
+	text-align: right;
+	pointer-events: none;
+	color: #fff;
+}
+
+.bp-nav__item:hover {
+	background: #020d17;
+}
+
+.bp-icon:after {
+	font-family: 'bpicons';
+	font-weight: normal;
+	font-style: normal;
+	font-variant: normal;
+	text-align: center;
+	text-transform: none;
+	/* color: #358ee6; */
+	-webkit-font-smoothing: antialiased;
+	speak: none;
+}
+
+.bp-nav .bp-icon:after {
+	line-height: 2.4;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	text-indent: 0;
+}
+
+.bp-nav a:hover:after {
+	color: #fff;
+}
+
+.bp-icon--next:after {
+	content: '\e000';
+}
+
+.bp-icon--drop:after {
+	content: '\e001';
+}
+
+.bp-icon--archive:after {
+	content: '\e002';
+}
+
+.bp-icon--about:after {
+	content: '\e003';
+}
+
+.bp-icon--prev:after {
+	content: '\e004';
+}
+
+.dummy-logo {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 300px;
+	height: 120px;
+	padding: 1em 0 0 0;
+	text-align: center;
+	color: #358ee6;
+	background: rgba(0,0,0,.7);
+	display:none;
+}
+
+.dummy-icon {
+	font-size: 4em;
+}
+
+.dummy-heading {
+	font-size: 0.75em;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+}
+
+.content {
+	position: relative;
+	min-height: 300px;
+	margin: 0 0 0 0;
+}
+.content2 {
+	position: relative;
+	min-height: 300px;
+	margin: 0 0 0 0;
+}
+
+.content--loading {
+	background: url(../img/loading.svg) no-repeat 50% 50%;
+}
+
+.products {
+	margin: 0;
+	padding: 2em;
+	/* text-align: center; */
+}
+
+.product {
+	display: inline-block;
+	width: 22%;
+	height: 0;
+	margin: 10px;
+	border-radius: 10px;
+	letter-spacing: 1px;
+	padding-bottom: 23%;
+	text-align:center;
+	color: rgba(255,255,255,0.7356);
+	background: rgba(0,0,0,.356);
+	box-shadow: 0px 3px 6px 0px black;
+}
+
+li.product {}
+
+.product .foodicon {
+	padding-bottom: 20%;
+	padding-top: 17%;
+	text-align:center;
+	padding-left: 10%;
+	padding-right: 10%;
+	overflow: hidden;
+	overflow-y: hidden;
+}
+
+.info {
+	font-size: 1.1em;
+	font-weight: bold;
+	padding: 20vh 1em 0;
+	text-align: center;
+	color: #47484c;
+}
+
+.geektext {
+	font-size: 1.1em;
+	font-weight: bold;
+	padding: 16vh 30% 0;
+	text-align: center;
+	/*color: #47484c;*/
+	color: #ffffffa8;
+}
+
+body #cdawrap {
+	top: auto;
+	bottom: 15px;
+	background: rgba(0, 0, 0, 0.1);
+}
+
+body #cdawrap .carbon-text {
+	color: #505158;
+}
+
+body #cdawrap a.carbon-poweredby {
+	color: #7883c4;
+}
+
+body #cdawrap a:hover.carbon-poweredby {
+	color: #fff;
+}
+
+.geekbutton{
+	width:auto;
+	height:auto;
+	margin-top:36px;
+	margin-bottom:10px;
+	outline:#517b9b;
+	padding: 10px 60px;
+    text-decoration: none;
+    color: #fff;
+    /*color:rgba(255,255,255,.7);*/
+    border: 1px solid #fff;
+    border-radius: 23px;
+    background-color: transparent;
+	/*background:rgb(66, 66, 66);	*/
+    font-size:18px;
+    font-family: Muli,'Helvetica Neue','Hiragino Sans GB','WenQuanYi Micro Hei','Microsoft Yahei',sans-serif !important;
+    display:none;
+}
+.geekbutton:hover{border: 1px solid #fff;cursor:pointer}
+.mediatitle{
+	padding-top:5%;
+	text-align:center;
+	display:none;
+}
+
+@media screen and (max-width: 40em) {
+	.mediatitle{padding-top:17%;display:block;color:#fff}
+	.geekbutton{display:none;}
+	.bp-header {
+		padding-top: 3em;
+		display:none;
+	}
+	.container {
+	overflow-y: auto;
+	height: 100vh;
+	/*background:url('/img/background.jpg');*/
+	/*background-size:100%;*/
+	background:transparent;
+}
+	.bp-header__main,
+	.bp-nav {
+		width: 100%;
+		text-align: center;
+	}
+	.dummy-logo {
+		display: none;
+	}
+	.content2 {
+		margin: 3% 0 0 0;
+	}
+	.content {
+	position: relative;
+	min-height: 300px;
+	margin: 9% 0 0 0;
+}
+	body,
+	.container {
+		height: auto;
+		overflow: auto;
+	}
+	.product {
+	display: inline-block;
+	width: 40%;
+	height: 0;
+	margin: 10px;
+	border-radius: 6px;
+	letter-spacing: 1px;
+	padding-bottom: 40%;
+	text-align:center;
+	/*color: #030a10;*/
+	/*background: rgba(255,255,255);*/
+	/*box-shadow: 1px -1px 3px 0px white; */
+}
+	.product .foodicon {
+	font-size: 0.9em;
+	line-height: 90%;
+	padding-bottom: 20%;
+	padding-top: 15%;
+	/* text-align:center; */
+}
+	body{
+	color:#fff;
+	}
+	.geektext {
+	font-size: 1.1em;
+	font-weight: bold;
+	padding: 20vh 17% 0;
+	text-align: center;
+	/*color: #47484c;*/
+	color: #ffffffa8;
+}
+
+}

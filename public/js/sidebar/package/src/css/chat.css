@@ -1,0 +1,256 @@
+@context border-box {
+  .gitter-hidden {
+    display: none;
+  }
+
+  .gitter-icon {
+    width: 22px;
+    height: 22px;
+
+    fill: currentColor;
+  }
+
+  /*
+   * States:
+   * `.is-collapsed`
+   * `.is-loading`
+   */
+  .gitter-chat-embed {
+    --background-color: #ffffff;
+
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    left: 60%;
+    bottom: 0;
+    right: 0;
+
+    display: flex;
+    flex-direction: row;
+
+    background-color: var(--background-color);
+    border-left: 1px solid #333;
+    box-shadow: -12px 0 18px 0 rgba(50, 50, 50, 0.3);
+
+    transition: transform 0.3s cubic-bezier(0.16, 0.22, 0.22, 1.7);
+
+    &.is-collapsed:not(.is-loading) {
+      transform: translateX(110%);
+    }
+
+    /* Add some "extension" so that there isn't a gap
+     * when we translate(via animation) more than 100% */
+    &:after {
+      content: '';
+
+      z-index: -1;
+      position: absolute;
+      top: 0;
+      left: 100%;
+      bottom: 0;
+      right: -100%;
+
+      background-color: var(--background-color);
+    }
+
+    @media (max-width: 1150px) {
+      left: 45%;
+    }
+    @media (max-width: 944px) {
+      left: 30%;
+    }
+    @media (max-width: 600px) {
+      left: 15%;
+    }
+    @media (max-width: 500px) {
+      left: 0;
+      border-left: none;
+    }
+
+    & > iframe {
+      flex: 1;
+      width: 100%;
+      height: 100%;
+
+      border: 0;
+    }
+
+  }
+
+
+  .gitter-chat-embed-loading-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+
+    display: none;
+    /* main axis */
+    justify-content: center;
+    /* cross axis */
+    align-items: center;
+
+    .is-loading & {
+      display: flex;
+    }
+  }
+
+
+  @svg svg-loading-indicator {
+    viewBox: 0 0 1792 1792;
+    fill: #3a3133;
+
+    @path {
+      d: M526 1394q0 53-37.5 90.5t-90.5 37.5q-52 0-90-38t-38-90q0-53 37.5-90.5t90.5-37.5 90.5 37.5 37.5 90.5zm498 206q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-704-704q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm1202 498q0 52-38 90t-90 38q-53 0-90.5-37.5t-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-964-996q0 66-47 113t-113 47-113-47-47-113 47-113 113-47 113 47 47 113zm1170 498q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-640-704q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm530 206q0 93-66 158.5t-158 65.5q-93 0-158.5-65.5t-65.5-158.5q0-92 65.5-158t158.5-66q92 0 158 66t66 158z;
+    }
+  }
+
+  .gitter-chat-embed-loading-indicator {
+    opacity: 0.75;
+    background-image: svg(svg-loading-indicator);
+
+    animation: spin 2s infinite linear;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(359.9deg);
+    }
+  }
+
+
+  .gitter-chat-embed-action-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    justify-content: flex-end;
+
+    padding-bottom: 0.7em;
+
+    background: linear-gradient(to bottom, #ffffff 0%, #ffffff 50%, rgba(255, 255, 255, 0) 100%);
+
+  }
+
+  .gitter-chat-embed-action-bar-item {
+    display: flex;
+    /* main axis */
+    justify-content: center;
+    /* cross axis */
+    align-items: center;
+
+    width: 40px;
+    height: 40px;
+
+    padding-left: 0;
+    padding-right: 0;
+
+    opacity: 0.65;
+    background: none;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 22px 22px;
+    border: 0;
+    outline: none;
+
+    cursor: pointer;
+    cursor: hand;
+
+    transition: all 0.2s ease;
+
+    &:hover,
+    &:focus {
+      opacity: 1;
+    }
+
+    &:active {
+      filter: hue-rotate(80deg) saturate(150);
+    }
+  }
+
+  @svg svg-pop-out-icon {
+    viewBox: 0 0 200 171.429;
+    fill: #3a3133;
+
+    @path {
+      d: M157.143,103.571v35.714c0,8.854-3.144,16.426-9.431,22.713s-13.858,9.431-22.712,9.431H32.143 c-8.854,0-16.425-3.144-22.712-9.431S0,148.14,0,139.285V46.429c0-8.854,3.144-16.425,9.431-22.712 c6.287-6.287,13.858-9.431,22.712-9.431h78.572c1.041,0,1.896,0.335,2.566,1.004c0.67,0.67,1.004,1.525,1.004,2.567V25 c0,1.042-0.334,1.897-1.004,2.567c-0.67,0.67-1.525,1.004-2.566,1.004H32.143c-4.911,0-9.115,1.749-12.612,5.246 s-5.246,7.701-5.246,12.612v92.856c0,4.911,1.749,9.115,5.246,12.612s7.701,5.245,12.612,5.245H125c4.91,0,9.115-1.748,12.611-5.245 c3.497-3.497,5.246-7.701,5.246-12.612v-35.714c0-1.042,0.334-1.897,1.004-2.567c0.67-0.669,1.525-1.004,2.567-1.004h7.143 c1.042,0,1.897,0.335,2.567,1.004C156.809,101.674,157.143,102.529,157.143,103.571z M200,7.143v57.143 c0,1.935-0.707,3.609-2.121,5.022c-1.413,1.414-3.088,2.121-5.021,2.121c-1.935,0-3.609-0.707-5.022-2.121l-19.644-19.643 l-72.767,72.769c-0.744,0.744-1.6,1.115-2.567,1.115s-1.823-0.371-2.567-1.115L77.567,109.71c-0.744-0.744-1.116-1.6-1.116-2.567 c0-0.967,0.372-1.822,1.116-2.566l72.768-72.768l-19.644-19.643c-1.413-1.414-2.12-3.088-2.12-5.022c0-1.935,0.707-3.609,2.12-5.022 C132.105,0.707,133.779,0,135.715,0h57.143c1.934,0,3.608,0.707,5.021,2.121C199.293,3.534,200,5.208,200,7.143z;
+    }
+  }
+
+  .gitter-chat-embed-action-bar-item-pop-out {
+    margin-right: -4px;
+    background-image: svg(svg-pop-out-icon);
+  }
+
+  @svg svg-collapse-icon {
+    viewBox: 0 0 171.429 171.429;
+    fill: #3a3133;
+
+    @path {
+      d: M122.433,106.138l-16.295,16.295c-0.744,0.744-1.6,1.116-2.566,1.116c-0.968,0-1.823-0.372-2.567-1.116l-15.29-15.29 l-15.29,15.29c-0.744,0.744-1.6,1.116-2.567,1.116s-1.823-0.372-2.567-1.116l-16.294-16.295c-0.744-0.744-1.116-1.6-1.116-2.566 c0-0.968,0.372-1.823,1.116-2.567l15.29-15.29l-15.29-15.29c-0.744-0.744-1.116-1.6-1.116-2.567s0.372-1.823,1.116-2.567 L65.29,48.996c0.744-0.744,1.6-1.116,2.567-1.116s1.823,0.372,2.567,1.116l15.29,15.29l15.29-15.29 c0.744-0.744,1.6-1.116,2.567-1.116c0.967,0,1.822,0.372,2.566,1.116l16.295,16.294c0.744,0.744,1.116,1.6,1.116,2.567 s-0.372,1.823-1.116,2.567l-15.29,15.29l15.29,15.29c0.744,0.744,1.116,1.6,1.116,2.567 C123.549,104.539,123.177,105.394,122.433,106.138z M146.429,85.714c0-11.012-2.717-21.168-8.148-30.469 s-12.797-16.667-22.098-22.098S96.726,25,85.714,25s-21.168,2.716-30.469,8.147S38.579,45.945,33.147,55.246S25,74.703,25,85.714 s2.716,21.168,8.147,30.469s12.797,16.666,22.098,22.098s19.457,8.148,30.469,8.148s21.168-2.717,30.469-8.148 s16.666-12.797,22.098-22.098S146.429,96.726,146.429,85.714z M171.429,85.714c0,15.551-3.832,29.893-11.496,43.024 c-7.664,13.133-18.062,23.53-31.194,31.194c-13.132,7.664-27.474,11.496-43.024,11.496s-29.892-3.832-43.024-11.496 c-13.133-7.664-23.531-18.062-31.194-31.194C3.832,115.607,0,101.265,0,85.714S3.832,55.822,11.496,42.69 c7.664-13.133,18.062-23.531,31.194-31.194C55.822,3.832,70.164,0,85.714,0s29.893,3.832,43.024,11.496 c13.133,7.664,23.53,18.062,31.194,31.194C167.597,55.822,171.429,70.164,171.429,85.714z;
+    }
+  }
+
+  .gitter-chat-embed-action-bar-item-collapse-chat {
+      background-image: svg(svg-collapse-icon);
+  }
+
+
+
+  .gitter-open-chat-button {
+    z-index: 100;
+    position: fixed;
+    bottom: 0;
+    right: 10px;
+
+    padding: 1em 3em;
+
+    background-color: #36bc98;
+    border: 0;
+    border-top-left-radius: 0.5em;
+    border-top-right-radius: 0.5em;
+
+    color: #ffffff;
+    font-family: sans-serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: none;
+
+    cursor: pointer;
+    cursor: hand;
+
+    transition: all 0.3s ease;
+
+    &:visited {
+      color: #ffffff;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: #3ea07f;
+      color: #ffffff;
+    }
+    &:focus {
+      box-shadow: 0 0 8px rgba(62, 160, 127, 0.6);
+
+      outline: none;
+    }
+
+    &:active {
+      color: #eeeeee;
+    }
+
+    &.is-collapsed {
+      transform: translateY(120%);
+    }
+
+  }
+}

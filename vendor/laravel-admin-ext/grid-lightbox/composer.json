@@ -1,0 +1,34 @@
+{
+    "name": "laravel-admin-ext/grid-lightbox",
+    "description": "Turn your grid into a lightbox & gallery",
+    "type": "library",
+    "keywords": ["laravel-admin", "extension", "grid", "lightbox", "gallery"],
+    "homepage": "https://github.com/laravel-admin-ext/grid-lightbox",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "song",
+            "email": "zosong@126.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "encore/laravel-admin": "~1.6"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Encore\\Grid\\Lightbox\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Encore\\Grid\\Lightbox\\LightboxServiceProvider"
+            ]
+
+        }
+    }
+}
