@@ -1,0 +1,71 @@
+stages:
+  - build
+  - test
+  - deploy
+
+
+variables:
+  # AWS_KEY: See https://console.aws.amazon.com/iam/home?#/users/sidecar-ci?section=security_credentials
+  # AWS_SECRET: See https://console.aws.amazon.com/iam/home?#/users/sidecar-ci?section=security_credentials
+
+cache:
+  paths:
+  - node_modules/
+  - dist/
+
+
+build:
+  stage: build
+  image: node:8
+  script:
+    - npm install
+    - npm run build
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - node_modules/
+      - dist/
+
+
+test:
+  stage: test
+  image: node:8
+  script:
+    - npm test
+  variables:
+    SELENIUM_REMOTE_URL: http://selenium-server:4444/wd/hub
+  services:
+    - name: selenium/standalone-chrome:3.14.0
+      alias: selenium-server
+
+
+
+
+deploy_prod_microsite_manual:
+  stage: deploy
+  image: node:8
+  only:
+    - master
+  # Production is only manual
+  when: manual
+  script:
+    # This handles building, uploading, deploying
+    - npm run deploy-microsite
+  environment:
+    name: microsite-prod
+    url: https://sidecar.gitter.im/
+
+
+deploy_prod_script_manual:
+  stage: deploy
+  image: node:8
+  only:
+    - tags
+  # Production is only manual
+  when: manual
+  script:
+    # This handles building, uploading, deploying
+    - npm run deploy-sidecar
+  environment:
+    name: script-prod
+    url: https://sidecar.gitter.im/dist/sidecar.v1.js
